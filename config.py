@@ -90,8 +90,8 @@ screens = [
                 widget.Prompt(),
                 widget.WindowName(),
                 widget.Systray(),
+		widget.TextBox("⏰"),
                 widget.Clock(format="%Y-%m-%d %a %I:%M %p"),
-                widget.QuickExit(),
             ],
             24,
             # border_width=[2, 0, 2, 0],  # Draw top and bottom borders
