@@ -90,6 +90,11 @@ screens = [
                 widget.Prompt(),
                 widget.WindowName(),
                 widget.Systray(),
+		widget.OpenWeather(
+		    zip='23185', 
+		    metric=False,
+		    format='{location_city}: {temp} °{units_temperature} {icon} {weather_details}'
+		),
 		widget.TextBox("⏰"),
                 widget.Clock(format="%Y-%m-%d %a %I:%M %p"),
             ],
