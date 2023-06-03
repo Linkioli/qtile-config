@@ -30,7 +30,14 @@ keys = [
     Key([mod], "r", lazy.spawncmd(), desc="Spawn a command using a prompt widget"),
 ]
 
-groups = [Group(i) for i in "123456789"]
+groups = [Group(i) for i in '123456']
+# groups = [
+#    Group('I'),
+#    Group('II'),
+#    Group('III'),
+#    Group('IV'),
+#    Group('V'),
+#]
 
 for i in groups:
     keys.extend(
@@ -64,7 +71,7 @@ layouts = [
 	margin=5,
 	ratio=0.55,
 	),
-    layout.Max(),
+    # layout.Max(),
     # layout.Floating(
     #	border_focus='#ebdbb2',
     #	border_normal='#282828',
@@ -92,7 +99,7 @@ extension_defaults = widget_defaults.copy()
 
 screens = [
     Screen(
-        bottom=bar.Bar(
+        top=bar.Bar(
             [
                 widget.CurrentLayout(),
                 widget.GroupBox(),
