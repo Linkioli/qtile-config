@@ -86,17 +86,24 @@ screens = [
     Screen(
         top=bar.Bar(
             [
-                widget.GroupBox(),
-                widget.Prompt(),
-                widget.WindowName(),
-                widget.Systray(),
+                widget.GroupBox(
+		    background='#1d2021', 
+		    highlight_method='text',
+		    this_current_screen_border='#fe8019',
+		    hide_unused=True
+		),
+                widget.WindowName(background='#1d2021'),
+                widget.Systray(backgorund='#1d2021'),
+		widget.TextBox("🔉", background='#1d2021'),
+		widget.PulseVolume(background='#1d2021'),
 		widget.OpenWeather(
+		    background='#1d2021',
 		    zip='23185', 
 		    metric=False,
 		    format='{location_city}: {temp} °{units_temperature} {icon} {weather_details}'
 		),
-		widget.TextBox("⏰"),
-                widget.Clock(format="%Y-%m-%d %a %I:%M %p"),
+		widget.TextBox("⏰", background='#1d2021'),
+                widget.Clock(format="%Y-%m-%d %a %I:%M %p", background='#1d2021'),
             ],
             24,
             # border_width=[2, 0, 2, 0],  # Draw top and bottom borders
