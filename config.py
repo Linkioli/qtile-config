@@ -30,6 +30,38 @@ keys = [
     Key([mod], "r", lazy.spawncmd(), desc="Spawn a command using a prompt widget"),
 ]
 
+colors = {
+	'red1': '#cc241d',
+	'red2': '#fb4934',
+	'green1': '#98971a',
+	'green2': '#b8bb26',
+	'yellow1': '#d79921',
+	'yellow2': '#fabd2f',
+	'blue1': '#458588',
+	'blue2': '#83a598',
+	'purple1': '#b16286',
+	'purple2': '#d3869b',
+	'aqua1': '#689d6a',
+	'aqua2': '#8ec07c',
+	'orange1': '#d65s0e',
+	'orange2': '#fe8019',
+	'gray1': '#a89984',
+	'gray2': '#928374',
+	
+	'bg0': '#282828',
+	'bg0_h': '#1d2021',
+	'bg1': '#3c3836',
+	'bg2': '#504945',
+	'bg3': '665c54',
+	'bg4': '#7c6f64',
+
+	'fg0': '#fbf1c7',
+	'fg1': '#ebdbb2',
+	'fg2': '#d5c4a1',
+	'fg3': '#bdae93',
+	'fg4': '#a89984',
+}
+
 def init_group_names():
     return [('I', {'layout': 'monadtall'}),
             ('II', {'layout': 'monadtall'}),
@@ -50,8 +82,8 @@ for i, (name, kwargs) in enumerate(group_names, 1):
 
 layouts = [
     layout.MonadTall(
-	border_focus='#ebdbb2',
-	border_normal='#282828',
+	border_focus=colors['fg1'],
+	border_normal=colors['bg0'],
 	border_width=2,
 	margin=5,
 	ratio=0.55,
@@ -75,6 +107,7 @@ layouts = [
     # layout.Zoomy(),
 ]
 
+
 widget_defaults = dict(
     font="sans",
     fontsize=12,
@@ -86,25 +119,27 @@ screens = [
     Screen(
         top=bar.Bar(
             [
-                widget.GroupBox(
-		    background='#1d2021', 
-		    highlight_method='text',
-		    this_current_screen_border='#fe8019',
-		    hide_unused=True
-		),
-                widget.WindowName(background='#1d2021'),
-                widget.Systray(backgorund='#1d2021'),
-		widget.TextBox("🔉", background='#1d2021'),
-		widget.PulseVolume(background='#1d2021'),
-		widget.OpenWeather(
-		    background='#1d2021',
-		    zip='23185', 
-		    metric=False,
-		    format='{location_city}: {temp} °{units_temperature} {icon} {weather_details}'
-		),
-		widget.TextBox("⏰", background='#1d2021'),
-                widget.Clock(format="%Y-%m-%d %a %I:%M %p", background='#1d2021'),
+
+            widget.GroupBox(
+		    	background=colors['bg0_h'], 
+		    	highlight_method='text',
+		    	this_current_screen_border=colors['orange2'],
+		    	hide_unused=True
+			),
+            widget.WindowName(background=colors['bg0_h']),
+            widget.Systray(background=colors['bg0_h']),
+			widget.TextBox("🔉", background=colors['bg0_h']),
+			widget.PulseVolume(background=colors['bg0_h']),
+			widget.OpenWeather(
+			    background=colors['bg0_h'],
+			    zip='23185', 
+			    metric=False,
+			    format='{location_city}: {temp} °{units_temperature} {icon} {weather_details}'
+			),
+			widget.TextBox("⏰", background=colors['bg0_h']),
+            widget.Clock(format="%Y-%m-%d %a %I:%M %p", background=colors['bg0_h']),
             ],
+
             24,
             # border_width=[2, 0, 2, 0],  # Draw top and bottom borders
             # border_color=["ff00ff", "000000", "ff00ff", "000000"]  # Borders are magenta
@@ -125,8 +160,8 @@ follow_mouse_focus = True
 bring_front_click = False
 cursor_warp = False
 floating_layout = layout.Floating(
-    border_focus='#ebdbb2',
-    border_normal='#282828',
+    border_focus=colors['fg1'],
+    border_normal=colors['bg0'],
     border_width=2,
     margin=5, 
     float_rules=[
