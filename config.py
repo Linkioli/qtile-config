@@ -126,7 +126,9 @@ screens = [
 		    	background=colors['bg0_h'], 
 		    	highlight_method='text',
 		    	this_current_screen_border=colors['orange2'],
-		    	hide_unused=True
+		    	hide_unused=True,
+                disable_drag=True,
+                use_mouse_wheel=False,
 			),
             widget.WindowName(background=colors['bg0_h']),
             widget.Systray(background=colors['bg0_h']),
