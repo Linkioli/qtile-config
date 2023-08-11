@@ -64,6 +64,14 @@ colors = {
 	'fg4': '#a89984',
 }
 
+# Function for Powerline affect taken from: https://github.com/hiimsergey/qtile-gruvbox-material/blob/main/config.py
+def pline(rl, fg, bg):
+    if rl == 0:
+        uc = ''
+    else:
+        uc = ''
+    return widget.TextBox(text = uc, padding = 0, fontsize = 22, foreground=fg, background=bg)
+
 def init_group_names():
     return [('I', {'layout': 'monadtall'}),
             ('II', {'layout': 'monadtall'}),
@@ -121,27 +129,44 @@ screens = [
     Screen(
         top=bar.Bar(
             [
-
             widget.GroupBox(
-		    	background=colors['bg0_h'], 
+		    	background=colors['bg2'],
 		    	highlight_method='text',
 		    	this_current_screen_border=colors['orange2'],
 		    	hide_unused=True,
                 disable_drag=True,
                 use_mouse_wheel=False,
 			),
+            pline(0, colors['bg2'], colors['bg0_h']),
             widget.WindowName(background=colors['bg0_h']),
-            widget.Systray(background=colors['bg0_h']),
-			widget.TextBox("🔉", background=colors['bg0_h']),
-			widget.PulseVolume(background=colors['bg0_h']),
+            pline(1, colors['green1'], colors['bg0_h']),
+            widget.Systray(background=colors['green1']),
+            pline(1, colors['purple1'], colors['green1']),
+			widget.TextBox("⌨", background=colors['purple1']),
+            widget.KeyboardLayout(
+                background=colors['purple1'],
+                configured_keyboards= ['us colemak', 'us'],
+                ),
+            pline(1, colors['yellow1'], colors['purple1']),
+			widget.TextBox("🔉", background=colors['yellow1']),
+			widget.PulseVolume(background=colors['yellow1']),
+            pline(1, colors['blue1'], colors['yellow1']),
+			widget.TextBox("🔅", background=colors['blue1']),
 			widget.OpenWeather(
-			    background=colors['bg0_h'],
+			    background=colors['blue1'],
 			    zip='23185', 
 			    metric=False,
 			    format='{location_city}: {temp} °{units_temperature} {icon} {weather_details}'
 			),
-			widget.TextBox("⏰", background=colors['bg0_h']),
-            widget.Clock(format="%Y-%m-%d %a %I:%M %p", background=colors['bg0_h']),
+            pline(1, colors['orange2'], colors['blue1']),
+			widget.TextBox("⏰", background=colors['orange2']),
+            widget.Clock(format="%Y-%m-%d %a %I:%M %p", background=colors['orange2']),
+            pline(1, colors['red1'], colors['orange2']),
+            widget.QuickExit(
+                background=colors['red1'],
+                fontsize=18,
+                default_text='⏻',
+                ),
             ],
 
             24,
@@ -190,12 +215,4 @@ auto_minimize = True
 # When using the Wayland backend, this can be used to configure input devices.
 wl_input_rules = None
 
-# XXX: Gasp! We're lying here. In fact, nobody really uses or cares about this
-# string besides java UI toolkits; you can see several discussions on the
-# mailing lists, GitHub issues, and other WM documentation that suggest setting
-# this string if your java app doesn't work correctly. We may as well just lie
-# and say that we're a working one by default.
-#
-# We choose LG3D to maximize irony: it is a 3D non-reparenting WM written in
-# java that happens to be on java's whitelist.
-wmname = "LG3D"
+wmname = "Qtile"
