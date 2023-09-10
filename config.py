@@ -139,9 +139,7 @@ screens = [
 			),
             pline(0, colors['bg2'], colors['bg0_h']),
             widget.WindowName(background=colors['bg0_h']),
-            pline(1, colors['green1'], colors['bg0_h']),
-            widget.Systray(background=colors['green1']),
-            pline(1, colors['purple1'], colors['green1']),
+            pline(1, colors['purple1'], colors['bg0_h']),
 			widget.TextBox("⌨", background=colors['purple1']),
             widget.KeyboardLayout(
                 background=colors['purple1'],
@@ -162,11 +160,7 @@ screens = [
 			widget.TextBox("⏰", background=colors['orange2']),
             widget.Clock(format="%Y-%m-%d %a %I:%M %p", background=colors['orange2']),
             pline(1, colors['red1'], colors['orange2']),
-            widget.QuickExit(
-                background=colors['red1'],
-                fontsize=18,
-                default_text='⏻',
-                ),
+            widget.Systray(background=colors['red1']),
             ],
 
             24,
