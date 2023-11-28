@@ -20,9 +20,12 @@ keys = [
     Key([mod], "e", lazy.layout.up(), desc="Move focus up"),
     Key([mod, "shift"], "h", lazy.layout.shrink_main(), desc="Decrease ratio"),
     Key([mod, "shift"], "i", lazy.layout.grow_main(), desc="Increase ratio"),
-    Key([mod], "space", lazy.layout.next(), desc="Move window focus to other window"),
-    Key([mod], "m", lazy.layout.swap_main(), desc="Promote focused window to master"),
-    Key([mod, "shift"], "f", lazy.window.toggle_floating(), desc="Toggle floating state of focused window"),
+    Key([mod], "space", lazy.layout.next(),
+        desc="Move window focus to other window"),
+    Key([mod], "m", lazy.layout.swap_main(),
+        desc="Promote focused window to master"),
+    Key([mod, "shift"], "f", lazy.window.toggle_floating(),
+        desc="Toggle floating state of focused window"),
     Key([mod], "Return", lazy.spawn(terminal), desc="Launch terminal"),
     # Toggle between different layouts as defined below
     Key([mod], "Tab", lazy.next_layout(), desc="Toggle between layouts"),
@@ -33,44 +36,47 @@ keys = [
 ]
 
 colors = {
-	'red1': '#cc241d',
-	'red2': '#fb4934',
-	'green1': '#98971a',
-	'green2': '#b8bb26',
-	'yellow1': '#d79921',
-	'yellow2': '#fabd2f',
-	'blue1': '#458588',
-	'blue2': '#83a598',
-	'purple1': '#b16286',
-	'purple2': '#d3869b',
-	'aqua1': '#689d6a',
-	'aqua2': '#8ec07c',
-	'orange1': '#d65s0e',
-	'orange2': '#fe8019',
-	'gray1': '#a89984',
-	'gray2': '#928374',
-	
-	'bg0': '#282828',
-	'bg0_h': '#1d2021',
-	'bg1': '#3c3836',
-	'bg2': '#504945',
-	'bg3': '665c54',
-	'bg4': '#7c6f64',
+    'red1': '#cc241d',
+    'red2': '#fb4934',
+    'green1': '#98971a',
+    'green2': '#b8bb26',
+    'yellow1': '#d79921',
+    'yellow2': '#fabd2f',
+    'blue1': '#458588',
+    'blue2': '#83a598',
+    'purple1': '#b16286',
+    'purple2': '#d3869b',
+    'aqua1': '#689d6a',
+    'aqua2': '#8ec07c',
+    'orange1': '#d65s0e',
+    'orange2': '#fe8019',
+    'gray1': '#a89984',
+    'gray2': '#928374',
 
-	'fg0': '#fbf1c7',
-	'fg1': '#ebdbb2',
-	'fg2': '#d5c4a1',
-	'fg3': '#bdae93',
-	'fg4': '#a89984',
+    'bg0': '#282828',
+    'bg0_h': '#1d2021',
+    'bg1': '#3c3836',
+    'bg2': '#504945',
+    'bg3': '665c54',
+    'bg4': '#7c6f64',
+
+    'fg0': '#fbf1c7',
+    'fg1': '#ebdbb2',
+    'fg2': '#d5c4a1',
+    'fg3': '#bdae93',
+    'fg4': '#a89984',
 }
 
 # Function for Powerline affect taken from: https://github.com/hiimsergey/qtile-gruvbox-material/blob/main/config.py
+
+
 def pline(rl, fg, bg):
     if rl == 0:
         uc = ''
     else:
         uc = ''
-    return widget.TextBox(text = uc, padding = 0, fontsize = 22, foreground=fg, background=bg)
+    return widget.TextBox(text=uc, padding=0, fontsize=22, foreground=fg, background=bg)
+
 
 def init_group_names():
     return [('I', {'layout': 'monadtall'}),
@@ -79,30 +85,35 @@ def init_group_names():
             ('IV', {'layout': 'monadtall'}),
             ('V', {'layout': 'monadtall'}),]
 
+
 def init_groups():
     return [Group(name, **kwargs) for name, kwargs in group_names]
+
 
 if __name__ in ["config", "__main__"]:
     group_names = init_group_names()
     groups = init_groups()
 
 for i, (name, kwargs) in enumerate(group_names, 1):
-    keys.append(Key([mod], str(i), lazy.group[name].toscreen()))		# Switch to another group
-    keys.append(Key([mod, "shift"], str(i), lazy.window.togroup(name)))		# Send current window to another group	
+    # Switch to another group
+    keys.append(Key([mod], str(i), lazy.group[name].toscreen()))
+    # Send current window to another group
+    keys.append(Key([mod, "shift"], str(i), lazy.window.togroup(name)))
 
 layouts = [
     layout.MonadTall(
-	border_focus=colors['fg1'],
-	border_normal=colors['bg0'],
-	border_width=2,
-	margin=5,
-	ratio=0.55,
-	),
+        border_focus=colors['fg1'],
+        border_normal=colors['bg0'],
+        border_width=2,
+        margin=5,
+        ratio=0.55,
+    ),
     # layout.Max(),
-    # layout.Floating(
-    #	border_focus='#ebdbb2',
-    #	border_normal='#282828',
-    #	),
+    layout.Floating(
+        border_focus='#ebdbb2',
+        border_normal='#282828',
+        border_width=2,
+    ),
     # Try more layouts by unleashing below layouts.
     # layout.Stack(num_stacks=2),
     # layout.Columns(),
@@ -129,38 +140,40 @@ screens = [
     Screen(
         top=bar.Bar(
             [
-            widget.GroupBox(
-		    	background=colors['bg2'],
-		    	highlight_method='text',
-		    	this_current_screen_border=colors['orange2'],
-		    	hide_unused=True,
-                disable_drag=True,
-                use_mouse_wheel=False,
-			),
-            pline(0, colors['bg2'], colors['bg0_h']),
-            widget.WindowName(background=colors['bg0_h']),
-            pline(1, colors['purple1'], colors['bg0_h']),
-			widget.TextBox("⌨", background=colors['purple1']),
-            widget.KeyboardLayout(
-                background=colors['purple1'],
-                configured_keyboards= ['us colemak', 'us'],
+                widget.GroupBox(
+                    background=colors['bg2'],
+                    highlight_method='text',
+                    this_current_screen_border=colors['orange2'],
+                    hide_unused=True,
+                    disable_drag=True,
+                    use_mouse_wheel=False,
                 ),
-            pline(1, colors['yellow1'], colors['purple1']),
-			widget.TextBox("🔉", background=colors['yellow1']),
-			widget.PulseVolume(background=colors['yellow1']),
-            pline(1, colors['blue1'], colors['yellow1']),
-			widget.TextBox("🔅", background=colors['blue1']),
-			widget.OpenWeather(
-			    background=colors['blue1'],
-			    zip='23185', 
-			    metric=False,
-			    format='{location_city}: {temp} °{units_temperature} {icon} {weather_details}'
-			),
-            pline(1, colors['orange2'], colors['blue1']),
-			widget.TextBox("⏰", background=colors['orange2']),
-            widget.Clock(format="%Y-%m-%d %a %I:%M %p", background=colors['orange2']),
-            pline(1, colors['red1'], colors['orange2']),
-            widget.Systray(background=colors['red1']),
+                pline(0, colors['bg2'], colors['bg0_h']),
+                widget.WindowName(background=colors['bg0_h']),
+                widget.Systray(background=colors['bg0_h']),
+                pline(1, colors['purple1'], colors['bg0_h']),
+                widget.TextBox("⌨", background=colors['purple1']),
+                widget.KeyboardLayout(
+                    background=colors['purple1'],
+                    configured_keyboards=['us colemak', 'us'],
+                ),
+                pline(1, colors['yellow1'], colors['purple1']),
+                widget.TextBox("🔉", background=colors['yellow1']),
+                widget.PulseVolume(background=colors['yellow1']),
+                pline(1, colors['blue1'], colors['yellow1']),
+                widget.TextBox("🔅", background=colors['blue1']),
+                widget.OpenWeather(
+                    background=colors['blue1'],
+                    zip='23185',
+                    metric=False,
+                    format='{location_city}: {temp} °{units_temperature} {icon} {weather_details}'
+                ),
+                pline(1, colors['orange2'], colors['blue1']),
+                widget.TextBox("⏰", background=colors['orange2']),
+                widget.Clock(format="%Y-%m-%d %a %I:%M %p",
+                             background=colors['orange2']),
+                pline(1, colors['red1'], colors['orange2']),
+                widget.CurrentLayoutIcon(background=colors['red1']),
             ],
 
             24,
@@ -172,8 +185,10 @@ screens = [
 
 # Drag floating layouts.
 mouse = [
-    Drag([mod], "Button1", lazy.window.set_position_floating(), start=lazy.window.get_position()),
-    Drag([mod], "Button3", lazy.window.set_size_floating(), start=lazy.window.get_size()),
+    Drag([mod], "Button1", lazy.window.set_position_floating(),
+         start=lazy.window.get_position()),
+    Drag([mod], "Button3", lazy.window.set_size_floating(),
+         start=lazy.window.get_size()),
     Click([mod], "Button2", lazy.window.bring_to_front()),
 ]
 
@@ -186,7 +201,7 @@ floating_layout = layout.Floating(
     border_focus=colors['fg1'],
     border_normal=colors['bg0'],
     border_width=2,
-    margin=5, 
+    margin=5,
     float_rules=[
         # Run the utility of `xprop` to see the wm class and name of an X client.
         *layout.Floating.default_float_rules,
