@@ -161,13 +161,7 @@ screens = [
                 widget.TextBox("🔉", background=colors['yellow1']),
                 widget.PulseVolume(background=colors['yellow1']),
                 pline(1, colors['blue1'], colors['yellow1']),
-                widget.TextBox("🔅", background=colors['blue1']),
-                widget.OpenWeather(
-                    background=colors['blue1'],
-                    zip='23185',
-                    metric=False,
-                    format='{temp} °{units_temperature} {icon} {weather_details}'
-                ),
+                widget.TextBox('TODO: Add METAR info', background=colors['blue1']),
                 pline(1, colors['orange2'], colors['blue1']),
                 widget.TextBox("⏰", background=colors['orange2']),
                 widget.Clock(format="%Y-%m-%d %a %I:%M:%S %p",
