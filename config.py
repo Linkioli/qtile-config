@@ -6,6 +6,7 @@ from libqtile import bar, layout, widget
 from libqtile.config import Click, Drag, Group, Key, Match, Screen
 from libqtile.lazy import lazy
 from libqtile.utils import guess_terminal
+import requests
 
 mod = "mod4"
 terminal = guess_terminal()
@@ -48,7 +49,7 @@ colors = {
     'purple2': '#d3869b',
     'aqua1': '#689d6a',
     'aqua2': '#8ec07c',
-    'orange1': '#d65s0e',
+    'orange1': '#d65d0e',
     'orange2': '#fe8019',
     'gray1': '#a89984',
     'gray2': '#928374',
@@ -67,8 +68,15 @@ colors = {
     'fg4': '#a89984',
 }
 
-# Function for Powerline affect taken from: https://github.com/hiimsergey/qtile-gruvbox-material/blob/main/config.py
 
+def get_metar(station: str):
+    station = station.upper()
+    url = f"https://tgftp.nws.noaa.gov/data/observations/metar/stations/{station}.TXT"
+    response = requests.get(url)
+    text_data = response.text.split("\n")[1]
+    return text_data
+
+# Function for Powerline affect taken from: https://github.com/hiimsergey/qtile-gruvbox-material/blob/main/config.py
 
 def pline(rl, fg, bg):
     if rl == 0:
@@ -150,24 +158,23 @@ screens = [
                 ),
                 pline(0, colors['bg2'], colors['bg0_h']),
                 widget.WindowName(background=colors['bg0_h']),
-                widget.Systray(background=colors['bg0_h']),
                 pline(1, colors['purple1'], colors['bg0_h']),
-                widget.TextBox("⌨", background=colors['purple1']),
+                widget.Systray(background=colors['purple1']),
+                pline(1, colors['blue1'], colors['purple1']),
                 widget.KeyboardLayout(
-                    background=colors['purple1'],
+                    background=colors['blue1'],
                     configured_keyboards=['us colemak', 'us'],
                 ),
-                pline(1, colors['yellow1'], colors['purple1']),
-                widget.TextBox("🔉", background=colors['yellow1']),
-                widget.PulseVolume(background=colors['yellow1']),
-                pline(1, colors['blue1'], colors['yellow1']),
-                widget.TextBox('TODO: Add METAR info', background=colors['blue1']),
-                pline(1, colors['orange2'], colors['blue1']),
-                widget.TextBox("⏰", background=colors['orange2']),
-                widget.Clock(format="%Y-%m-%d %a %I:%M:%S %p",
-                             background=colors['orange2']),
-                pline(1, colors['red1'], colors['orange2']),
-                widget.CurrentLayout(background=colors['red1'], icon_first = True),
+                pline(1, colors['aqua1'], colors['blue1']),
+                widget.TextBox("VOLUME:", background=colors['aqua1']),
+                widget.PulseVolume(background=colors['aqua1']),
+                pline(1, colors['green1'], colors['aqua1']),
+                widget.GenPollText(func = lambda: get_metar('kjgg'), background=colors['green1']),
+                pline(1, colors['orange1'], colors['green1']),
+                widget.Clock(format="%Y-%m-%d %a %I:%M %p",
+                             background=colors['orange1']),
+                pline(1, colors['red1'], colors['orange1']),
+                widget.CurrentLayout(background=colors['red1']),
             ],
 
             24,
