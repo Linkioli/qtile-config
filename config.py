@@ -83,7 +83,7 @@ def pline(rl, fg, bg):
         uc = ''
     else:
         uc = ''
-    return widget.TextBox(text=uc, padding=0, fontsize=22, foreground=fg, background=bg)
+    return widget.TextBox(text=uc, padding=0, font="Powerline Symbols", fontsize=22, foreground=fg, background=bg)
 
 
 def init_group_names():
